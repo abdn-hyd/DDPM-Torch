@@ -48,15 +48,15 @@ def create_images_grid(
     """
     images = [Image.fromarray(image) for image in images]
     w, h = images[0].size
-    grid = Image.new('RGB', size=(cols * w, rows * h))
+    grid = Image.new("RGB", size=(cols * w, rows * h))
     for i, image in enumerate(images):
         grid.paste(image, box=(i % cols * w, i // cols * h))
     return grid
 
 
 def create_denoising_gif(
-    input_folder: str, 
-    output_path: str, 
+    input_folder: str,
+    output_path: str,
     duration: int = 100,
     reverse_order: bool = False,
 ):
@@ -83,14 +83,6 @@ def create_denoising_gif(
         append_images=frames[1:],
         save_all=True,
         duration=duration,
-        loop=0
+        loop=0,
     )
     return output_path
-
-
-if __name__ == "__main__":
-    # Example usage
-    input_folder = "/Users/gunneo/ai/codes/Diffusion/outputs/samples/epoch_140"
-    output_path = "/Users/gunneo/ai/codes/Diffusion/outputs/samples/epoch_140/denoising_process.gif"
-    create_denoising_gif(input_folder, output_path, duration=100, reverse_order=False)
-    print(f"GIF saved at {output_path}")
